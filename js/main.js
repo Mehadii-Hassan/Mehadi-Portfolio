@@ -142,11 +142,12 @@
   document.getElementById("hero-name").textContent = DATA.profile.name;
   document.getElementById("logo-text").textContent = DATA.profile.monogram;
 
-  // Social icon buttons (GitHub, LinkedIn, Email).
+  // Social icon buttons (GitHub, LinkedIn, Email, Phone).
   const heroSocial = document.getElementById("hero-social");
   const socialBtns = [
     { icon: "github", url: LINKS.github, label: "GitHub" },
     { icon: "linkedin", url: LINKS.linkedin, label: "LinkedIn" },
+    { icon: "phone", url: "tel:" + PROFILE.phone.replace(/\s|\(|\)|\.|-/g, ""), label: "Phone" },
     { icon: "mail", url: LINKS.email, label: "Email" }
   ];
   socialBtns.forEach((s) => {
@@ -154,8 +155,11 @@
     const btn = document.createElement("a");
     btn.className = "icon-btn";
     btn.href = s.url;
-    btn.target = "_blank";
-    btn.rel = "noopener noreferrer";
+    // tel: and mailto: links shouldn't open a new tab.
+    if (!/^(tel:|mailto:)/.test(s.url)) {
+      btn.target = "_blank";
+      btn.rel = "noopener noreferrer";
+    }
     btn.setAttribute("aria-label", s.label);
     btn.innerHTML = icon(s.icon) || "";
     heroSocial.appendChild(btn);
@@ -693,7 +697,7 @@
     footerLinks.appendChild(a);
   });
   const year = new Date().getFullYear();
-  document.getElementById("footer-note").textContent = "© " + year + " " + PROFILE.name;
+  document.getElementById("footer-note").textContent = "© Powered By - " + PROFILE.name;
   document.getElementById("back-to-top").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: rfm ? "auto" : "smooth" });
   });
