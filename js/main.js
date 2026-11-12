@@ -142,13 +142,13 @@
   document.getElementById("hero-name").textContent = DATA.profile.name;
   document.getElementById("logo-text").textContent = DATA.profile.monogram;
 
-  // Social icon buttons (GitHub, LinkedIn, Email, Phone).
+  // Social icon buttons (order: LinkedIn, GitHub, Email, Phone).
   const heroSocial = document.getElementById("hero-social");
   const socialBtns = [
-    { icon: "github", url: LINKS.github, label: "GitHub" },
     { icon: "linkedin", url: LINKS.linkedin, label: "LinkedIn" },
-    { icon: "phone", url: "tel:" + PROFILE.phone.replace(/\s|\(|\)|\.|-/g, ""), label: "Phone" },
-    { icon: "mail", url: LINKS.email, label: "Email" }
+    { icon: "github", url: LINKS.github, label: "GitHub" },
+    { icon: "mail", url: LINKS.email, label: "Email" },
+    { icon: "phone", url: "tel:" + PROFILE.phone.replace(/\s|\(|\)|\.|-/g, ""), label: "Phone" }
   ];
   socialBtns.forEach((s) => {
     if (!s.url || s.url.indexOf("YOUR_") !== -1) return;
@@ -562,7 +562,20 @@
     return btn;
   }
 
-  // Email card: click-to-copy + a mailto button with prefilled subject.
+  // LinkedIn card (first).
+  contactCard("LinkedIn", "linkedin", LINKS.linkedin, LINKS.linkedin, {
+    href: LINKS.linkedin
+  });
+
+  // GitHub card (second). If placeholder, still show but disabled.
+  const ghCard = contactCard("GitHub", "github", LINKS.github, LINKS.github, { href: LINKS.github });
+  if (LINKS.github.indexOf("YOUR_") !== -1) {
+    ghCard.href = "#";
+    ghCard.style.opacity = "0.5";
+    ghCard.style.pointerEvents = "none";
+  }
+
+  // Email card (third): click-to-copy + a mailto button with prefilled subject.
   const emailLinkBtn = contactCard(
     "Email",
     "copy",
@@ -578,19 +591,6 @@
   mailBtn.setAttribute("aria-label", "Send an email to " + PROFILE.name);
   mailBtn.innerHTML = icon("mail") + "Send email";
   mailCard.appendChild(mailBtn);
-
-  // LinkedIn card.
-  contactCard("LinkedIn", "linkedin", LINKS.linkedin, LINKS.linkedin, {
-    href: LINKS.linkedin
-  });
-
-  // GitHub card. If placeholder, still show but disabled.
-  const ghCard = contactCard("GitHub", "github", LINKS.github, LINKS.github, { href: LINKS.github });
-  if (LINKS.github.indexOf("YOUR_") !== -1) {
-    ghCard.href = "#";
-    ghCard.style.opacity = "0.5";
-    ghCard.style.pointerEvents = "none";
-  }
 
   // Phone/WhatsApp card (shown when showPhone is true).
   if (DATA.profile.showPhone) {

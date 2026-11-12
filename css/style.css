@@ -556,7 +556,6 @@ section {
 .badge-6 { bottom: 30%; left: -20%; animation-delay: -0.8s; }
 .badge-7 { top: 45%; right: -20%; animation-delay: -2.4s; }
 .badge-8 { bottom: -12%; left: 6%; animation-delay: -3.6s; }
-.badge-9 { bottom: -10%; right: 14%; animation-delay: -1.2s; }
 @keyframes drift {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -1128,7 +1127,7 @@ footer {
   .badge-4 { right: -2%; }
   .badge-1 { left: -2%; }
   /* Hide the extra badges on small screens to avoid crowding. */
-  .badge-6, .badge-7, .badge-8, .badge-9 { display: none; }
+  .badge-5, .badge-6, .badge-7, .badge-8 { display: none; }
 }
 
 @media (max-width: 480px) {
