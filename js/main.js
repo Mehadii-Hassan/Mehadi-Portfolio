@@ -139,7 +139,6 @@
    *  3. Hero: name, avail text, typing roles, streaming intro,
    *     social icons.
    * ---------------------------------------------------------- */
-  document.getElementById("avail-text").textContent = DATA.profile.availText;
   document.getElementById("hero-name").textContent = DATA.profile.name;
   document.getElementById("logo-text").textContent = DATA.profile.monogram;
 

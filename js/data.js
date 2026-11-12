@@ -39,7 +39,6 @@ const PROFILE = {
   phone:     "+8801757399837",
   // Show phone / WhatsApp publicly? Set to true to display them.
   showPhone: false,
-  availText: "Open to remote opportunities",
   degrees:   [
     "Bachelor of Science in Computer Science and Engineering (CSE)"
   ],
