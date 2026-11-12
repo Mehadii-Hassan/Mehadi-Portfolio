@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Md. Mehadi Hassan</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#060A13; --text:#E8ECF4; --muted:#8B95A9; --accent:#22D3EE; --primary:#3B82F6;
+      --gradient: linear-gradient(135deg,#3B82F6,#22D3EE);
+      --border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: "Inter", sans-serif; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 24px;
+    }
+    .wrap { max-width: 520px; }
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(4rem, 12vw, 6rem);
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .mono { font-family: "JetBrains Mono", monospace; font-size: .85rem; color: var(--accent); margin-bottom: 16px; }
+    p { color: var(--muted); margin: 16px 0 32px; }
+    a.btn {
+      display: inline-block; color: #fff;
+      background: var(--gradient);
+      padding: 12px 28px; border-radius: 999px;
+      text-decoration: none; font-weight: 500;
+      transition: opacity .2s, transform .2s;
+      box-shadow: 0 4px 20px rgba(59,130,246,.35);
+    }
+    a.btn:hover { opacity: .9; transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mono">&gt; route not found... 😵</div>
+    <h1>404</h1>
+    <p>The page you're looking for does not exist in this repository.</p>
+    <a class="btn" href="./">Back to Home</a>
+  </div>
+</body>
+</html>
