@@ -212,57 +212,6 @@
       .then(() => streamText.immediate(heroStreamEl, DATA.heroIntro));
 
   /* ----------------------------------------------------------
-   *  4. Stats counters (computed from data.js — never fake).
-   * ---------------------------------------------------------- */
-  const statsRow = document.getElementById("stats-row");
-  const statItems = [
-    { n: DATA.projects.length, label: "Projects" },
-    { n: DATA.certifications.length, label: "Certifications" },
-    { n: countTech(), label: "Technologies" }
-  ];
-  function countTech() {
-    let set = new Set();
-    DATA.skills.forEach((g) => g.items.forEach((i) => set.add(i)));
-    return set.size;
-  }
-  statItems.forEach((s) => {
-    const div = document.createElement("div");
-    div.className = "stat reveal";
-    const num = document.createElement("span");
-    num.className = "stat-num";
-    num.dataset.count = s.n;
-    num.textContent = "0";
-    const label = document.createElement("span");
-    label.className = "stat-label";
-    label.textContent = s.label;
-    div.appendChild(num);
-    div.appendChild(label);
-    statsRow.appendChild(div);
-  });
-
-  // Count-up on scroll.
-  const counters = Array.from(document.querySelectorAll(".stat-num"));
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.dataset.count, 10);
-        if (rfm) { el.textContent = target; return; }
-        let current = 0;
-        const step = () => {
-          current += Math.ceil(target / 24);
-          if (current >= target) { el.textContent = target; return; }
-          el.textContent = current;
-          requestAnimationFrame(step);
-        };
-        step();
-        counterObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.4 });
-  counters.forEach((c) => counterObserver.observe(c));
-
-  /* ----------------------------------------------------------
    *  5. Scroll reveal (fade-up, staggered).
    * ---------------------------------------------------------- */
   const revealObserver = new IntersectionObserver((entries) => {
@@ -639,9 +588,53 @@
     ghCard.style.pointerEvents = "none";
   }
 
-  // Phone/WhatsApp only if flagged.
+  // Phone/WhatsApp card (shown when showPhone is true).
   if (DATA.profile.showPhone) {
-    contactCard("Phone", "phone", "WhatsApp " + PROFILE.phone, "https://wa.me/" + PROFILE.phone.replace(/\D/g, ""), { href: "https://wa.me/" + PROFILE.phone.replace(/\D/g, "") });
+    const waNum = PROFILE.phone.replace(/\D/g, "");           // e.g. 8801757399837
+    const telHref = "tel:" + PROFILE.phone.replace(/\s|\(|\)|\.|-/g, "");
+
+    const pCard = document.createElement("div");
+    pCard.className = "contact-card glass reveal";
+
+    // WhatsApp icon button (the main link).
+    const pBtn = document.createElement("a");
+    pBtn.className = "icon-btn";
+    pBtn.href = "https://wa.me/" + waNum;
+    pBtn.target = "_blank";
+    pBtn.rel = "noopener noreferrer";
+    pBtn.setAttribute("aria-label", "WhatsApp " + PROFILE.phone);
+    pBtn.innerHTML = icon("phone") || "";
+    pCard.appendChild(pBtn);
+
+    const pTitle = document.createElement("h3");
+    pTitle.textContent = "Phone";
+    pCard.appendChild(pTitle);
+
+    const pText = document.createElement("p");
+    pText.textContent = PROFILE.phone;
+    pCard.appendChild(pText);
+
+    // Call + WhatsApp action buttons.
+    const pActions = document.createElement("div");
+    pActions.className = "project-actions";
+    pActions.style.justifyContent = "center";
+
+    const callBtn = document.createElement("a");
+    callBtn.className = "btn btn-outline btn-sm";
+    callBtn.href = telHref;
+    callBtn.innerHTML = icon("phone") + "Call";
+    pActions.appendChild(callBtn);
+
+    const waBtn = document.createElement("a");
+    waBtn.className = "btn btn-primary btn-sm";
+    waBtn.href = "https://wa.me/" + waNum;
+    waBtn.target = "_blank";
+    waBtn.rel = "noopener noreferrer";
+    waBtn.innerHTML = icon("mail") + "WhatsApp";
+    pActions.appendChild(waBtn);
+
+    pCard.appendChild(pActions);
+    contactGrid.appendChild(pCard);
   }
 
   // Download CV card.
@@ -700,8 +693,7 @@
     footerLinks.appendChild(a);
   });
   const year = new Date().getFullYear();
-  document.getElementById("footer-note").textContent =
-    "© " + year + " " + PROFILE.name + " · Built with care, powered by LangGraph vibes.";
+  document.getElementById("footer-note").textContent = "© " + year + " " + PROFILE.name;
   document.getElementById("back-to-top").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: rfm ? "auto" : "smooth" });
   });

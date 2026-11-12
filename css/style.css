@@ -565,32 +565,6 @@ section {
   50% { transform: translateY(-12px); }
 }
 
-/* Stats row */
-.stats-row {
-  display: flex;
-  gap: var(--sp-4);
-  margin-top: var(--sp-5);
-  flex-wrap: wrap;
-}
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.stat-num {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text);
-}
-.stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
 /* Scroll down indicator */
 .scroll-down {
   position: absolute;
@@ -1141,7 +1115,6 @@ footer {
   .projects-grid { grid-template-columns: 1fr; }
   .project-card:first-child { grid-column: span 1; }
   .skills-grid { grid-template-columns: 1fr; }
-  .stats-row { gap: var(--sp-3); }
   .photo-frame { width: 240px; }
   .photo-badge { font-size: 0.6rem; padding: 6px 10px; }
   .badge-2 { left: -6%; }

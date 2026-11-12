@@ -38,7 +38,7 @@ const PROFILE = {
   email:     "mehadi.cse01@gmail.com",
   phone:     "+8801757399837",
   // Show phone / WhatsApp publicly? Set to true to display them.
-  showPhone: false,
+  showPhone: true,
   degrees:   [
     "Bachelor of Science in Computer Science and Engineering (CSE)"
   ],
