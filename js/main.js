@@ -641,26 +641,28 @@
     contactGrid.appendChild(pCard);
   }
 
-  // Download CV card.
+  // View CV card (opens the PDF in a new tab so visitors can view, then download).
   const cvA = document.createElement("a");
   cvA.className = "btn btn-outline btn-sm center";
   cvA.href = LINKS.resume;
-  cvA.setAttribute("download", "Md__Mehadi_Hassan.pdf");
+  cvA.target = "_blank";
+  cvA.rel = "noopener noreferrer";
   cvA.style.justifyContent = "center";
-  cvA.textContent = "Download CV";
+  cvA.textContent = "View CV";
   const cvCardWrap = document.createElement("div");
   cvCardWrap.className = "contact-card glass reveal";
   cvCardWrap.style.gap = "10px";
   const cvBtn = document.createElement("a");
   cvBtn.className = "icon-btn";
   cvBtn.href = LINKS.resume;
-  cvBtn.setAttribute("download", "Md__Mehadi_Hassan.pdf");
-  cvBtn.setAttribute("aria-label", "Download CV");
-  cvBtn.innerHTML = icon("download") || "";
+  cvBtn.target = "_blank";
+  cvBtn.rel = "noopener noreferrer";
+  cvBtn.setAttribute("aria-label", "View CV");
+  cvBtn.innerHTML = icon("external") || "";
   cvCardWrap.appendChild(cvBtn);
   cvCardWrap.appendChild(cvA);
   const t = document.createElement("h3");
-  t.textContent = "Download CV";
+  t.textContent = "View CV";
   cvCardWrap.appendChild(t);
   contactGrid.appendChild(cvCardWrap);
 
@@ -813,7 +815,7 @@
     actions.push({ label: "Open GitHub", type: "link", value: LINKS.github, icon: "github" });
     actions.push({ label: "Open LinkedIn", type: "link", value: LINKS.linkedin, icon: "linkedin" });
     actions.push({ label: "Copy email address", type: "copy", value: PROFILE.email, icon: "copy" });
-    actions.push({ label: "Download CV", type: "download", value: LINKS.resume, icon: "download" });
+    actions.push({ label: "View CV", type: "viewpdf", value: LINKS.resume, icon: "external" });
 
     return actions.filter((a) => !f || a.label.toLowerCase().includes(f));
   }
@@ -849,13 +851,9 @@
       case "copy":
         copyEmail();
         break;
-      case "download":
-        const a = document.createElement("a");
-        a.href = LINKS.resume;
-        a.download = "Md__Mehadi_Hassan.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+      case "viewpdf":
+        // Open the CV in a new tab so it can be viewed (and downloaded).
+        window.open(item.value, "_blank", "noopener noreferrer");
         break;
     }
   }

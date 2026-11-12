@@ -22,7 +22,7 @@
     { name: "education", desc: "my education & certs" },
     { name: "certs", desc: "my certifications" },
     { name: "contact", desc: "how to reach me" },
-    { name: "resume", desc: "download my CV" },
+    { name: "resume", desc: "view my CV" },
     { name: "github", desc: "open my GitHub" },
     { name: "linkedin", desc: "open my LinkedIn" },
     { name: "clear", desc: "clear the terminal" },
@@ -163,16 +163,11 @@
 
       case "resume":
         header("resume");
-        return out("Downloading " + LINKS.resume + "...")
+        return out("Opening " + LINKS.resume + "...")
           .then(() => {
-            const a = document.createElement("a");
-            a.href = LINKS.resume;
-            a.download = "Md__Mehadi_Hassan.pdf";
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
+            window.open(LINKS.resume, "_blank", "noopener");
           })
-          .then(out("done."))
+          .then(out("done. (view the PDF, download it from there if you need it)"))
           .then(addPrompt).then(() => done && done());
 
       case "github":
